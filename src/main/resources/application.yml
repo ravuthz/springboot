@@ -1,0 +1,6 @@
+# Main Configuration
+spring:
+  profiles:
+    active: 'dev'
+  application:
+    name: 'Spring Boot Application'
