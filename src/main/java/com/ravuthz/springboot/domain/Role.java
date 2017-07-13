@@ -1,4 +1,4 @@
-package com.ravuthz.springboot.domains;
+package com.ravuthz.springboot.domain;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -52,4 +52,11 @@ public class Role {
         this.role = role;
     }
 
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", role='" + role + '\'' +
+                '}';
+    }
 }

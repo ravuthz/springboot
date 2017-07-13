@@ -1,6 +1,6 @@
-package com.ravuthz.springboot.repositories;
+package com.ravuthz.springboot.repository;
 
-import com.ravuthz.springboot.domains.User;
+import com.ravuthz.springboot.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

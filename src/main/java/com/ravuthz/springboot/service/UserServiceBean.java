@@ -1,9 +1,10 @@
-package com.ravuthz.springboot.services;
+package com.ravuthz.springboot.service;
 
-import com.ravuthz.springboot.domains.Role;
-import com.ravuthz.springboot.domains.User;
-import com.ravuthz.springboot.repositories.RoleRepository;
-import com.ravuthz.springboot.repositories.UserRepository;
+import com.ravuthz.springboot.domain.Role;
+import com.ravuthz.springboot.domain.User;
+import com.ravuthz.springboot.repository.RoleRepository;
+import com.ravuthz.springboot.repository.UserRepository;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,7 +28,7 @@ public class UserServiceBean implements UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UserServiceBean.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceBean.class);
 
     @Override
     public User findUserByEmail(String email) {
@@ -40,6 +41,7 @@ public class UserServiceBean implements UserService {
         user.setActive(1);
         Role userRole = roleRepository.findByRole("ADMIN");
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
+        logger.debug(user.toString());
         userRepository.save(user);
     }
 

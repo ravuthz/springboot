@@ -1,4 +1,4 @@
-package com.ravuthz.springboot.domains;
+package com.ravuthz.springboot.domain;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -131,6 +131,15 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
+    public String getFullName() {
+        return this.firstName + " " + this.lastName;
+    }
+
+    public void setFullName(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -140,7 +149,7 @@ public class User implements Serializable {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", active=" + active +
-                ", roles=" + roles +
+//                ", roles=" + roles.toString() +
                 '}';
     }
 }

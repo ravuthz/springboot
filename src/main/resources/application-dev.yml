@@ -1,17 +1,46 @@
 # Development Environments
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: postgres
-    platform: POSTGRESQL
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    testWhileIdle: true
+    validationQuery: SELECT 1
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+  queries:
+    roles-query: select u.email, r.role from users u inner join user_role ur on(u.user_id=ur.user_id) inner join roles r on(ur.role_id=r.role_id) where u.email=?
+    users-query: select email, password, active from users u where email=?
+  user:
+    role: admin
+    username: ravuthz
+    password: 123123
+  thymeleaf:
+    cache: false
+    charset: UTF-8
 server:
   port: 8000
-
+logging:
+  file: /tmp/logs/development.log
+  pattern:
+    console: "%clr(%d{HH:mm:ss}){magenta} %clr(%-5level - %logger{15} %msg%n)"
+    file: "%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n"
+  level:
+    root: ERROR
+    org:
+      hibernate: INFO
+      springframework:
+        web: INFO
+        security: INFO
+      apache:
+        commons:
+          dbcp2: INFO
+    com:
+      ravuthz:
+        springboot: DEBUG
 
 # mvn -Dspring.profiles.active=dev spring-boot:run
 # mvn test

@@ -1,10 +1,8 @@
-package com.ravuthz.springboot.repositories;
+package com.ravuthz.springboot.repository;
 
-import com.ravuthz.springboot.domains.Role;
-import com.ravuthz.springboot.domains.User;
-import org.hamcrest.MatcherAssert;
+import com.ravuthz.springboot.domain.Role;
+import com.ravuthz.springboot.domain.User;
 import org.hamcrest.Matchers;
-import org.hibernate.mapping.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -12,19 +10,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import sun.swing.BakedArrayList;
 
 import java.util.*;
 import java.util.List;
-import java.util.Map;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by ravuthz on 7/9/17.

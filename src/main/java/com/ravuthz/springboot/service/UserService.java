@@ -1,6 +1,6 @@
-package com.ravuthz.springboot.services;
+package com.ravuthz.springboot.service;
 
-import com.ravuthz.springboot.domains.User;
+import com.ravuthz.springboot.domain.User;
 
 /**
  * Created by ravuthz on 7/9/17.
