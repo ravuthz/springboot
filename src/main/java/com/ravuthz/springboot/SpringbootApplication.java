@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.sql.DataSource;
-
 
 @SpringBootApplication
 public class SpringbootApplication implements CommandLineRunner {
@@ -21,6 +21,9 @@ public class SpringbootApplication implements CommandLineRunner {
 
     @Autowired
     DataSource dataSource;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private UserRepository userRepository;
@@ -35,8 +38,18 @@ public class SpringbootApplication implements CommandLineRunner {
 	@Override
 	public void run(String... strings) throws Exception {
         logger.debug("DATASOURCE = " + dataSource);
+        logger.debug("BCryptPasswordEncoder = " + bCryptPasswordEncoder);
         logger.debug("User Repository = " + userRepository);
         logger.debug("Role Repository = " + roleRepository);
+
+        Role createRole = new Role("ADMIN");
+        roleRepository.save(createRole);
+
+        User createUser = new User("ravuthz@gmail.com", "123123");
+        createUser.setFirstName("Ravuthz");
+        createUser.setLastName("Yo");
+
+        userRepository.save(createUser);
 
         for (User user : userRepository.findAll()) {
             logger.debug(user.toString());

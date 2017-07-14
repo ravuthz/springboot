@@ -61,7 +61,7 @@ public class AuthController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/admin/", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView getAdminPage() {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -72,7 +72,7 @@ public class AuthController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/user/", method = RequestMethod.GET)
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
     public ModelAndView getUserPage() {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

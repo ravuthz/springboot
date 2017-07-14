@@ -14,10 +14,13 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 /**
- * Created by ravuthz on 7/9/17.
+ * Created by Vannaravuth Yo
+ * Date : 7/14/17, 10:25 PM
+ * Email : ravuthz@gmail.com
  */
+
 @Service("userService")
-public class UserServiceBean implements UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -28,7 +31,7 @@ public class UserServiceBean implements UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    private static final Logger logger = LoggerFactory.getLogger(UserServiceBean.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
     public User findUserByEmail(String email) {

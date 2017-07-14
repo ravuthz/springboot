@@ -14,8 +14,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import javax.sql.DataSource;
 
 /**
- * Created by ravuthz on 7/13/17.
+ * Created by Vannaravuth Yo
+ * Date : 7/14/17, 10:25 PM
+ * Email : ravuthz@gmail.com
  */
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -38,6 +41,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
+
+//        auth.userDetailsService(userDetailsService)
+//                .passwordEncoder(new BCryptPasswordEncoder());
+
         auth.
                 jdbcAuthentication()
                 .usersByUsernameQuery(usersQuery)

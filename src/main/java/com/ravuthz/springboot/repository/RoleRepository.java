@@ -5,7 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Created by ravuthz on 7/9/17.
+ * Created by Vannaravuth Yo
+ * Date : 7/14/17, 10:25 PM
+ * Email : ravuthz@gmail.com
  */
 
 @Repository("roleRepository")

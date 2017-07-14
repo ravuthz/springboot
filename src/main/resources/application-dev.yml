@@ -5,11 +5,12 @@ spring:
     password: postgres
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/postgres
+    platform: postgres
     testWhileIdle: true
     validationQuery: SELECT 1
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     show-sql: true
   queries:
     roles-query: select u.email, r.role from users u inner join user_role ur on(u.user_id=ur.user_id) inner join roles r on(ur.role_id=r.role_id) where u.email=?
