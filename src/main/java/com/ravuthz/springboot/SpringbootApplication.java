@@ -10,11 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.sql.DataSource;
 import java.util.List;
 
 @SpringBootApplication
+@EntityScan(basePackages = "com.ravuthz.springboot.domain")
+@EnableJpaRepositories(basePackages = "com.ravuthz.springboot.repository")
 public class SpringbootApplication implements CommandLineRunner {
 
 	private static final Logger logger = LoggerFactory.getLogger(SpringbootApplication.class);
