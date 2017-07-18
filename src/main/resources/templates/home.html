@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot + Spring Security</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1>Spring Boot, Spring Security with Thymeleaf</h1>
+        <ol>
+            <li>Visit <a th:href="@{/register}">Register (Spring Security protected, Need Admin Role)</a></li>
+            <li>Visit <a th:href="@{/admin}">Admin page (Spring Security protected, Need Admin Role)</a></li>
+            <li>Visit <a th:href="@{/user}">User page (Spring Security protected, Need User Role)</a></li>
+        </ol>
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>
