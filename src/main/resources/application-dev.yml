@@ -1,1 +1,40 @@
 # Development Environments
+spring:
+  datasource:
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    platform: postgres
+    testWhileIdle: true
+    validationQuery: SELECT 1
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  thymeleaf:
+    cache: false
+    charset: UTF-8
+server:
+  port: 8000
+logging:
+  file: /tmp/logs/development.log
+  pattern:
+    console: "%clr(%d{HH:mm:ss}){magenta} %clr(%-5level - %logger{15} %msg%n)"
+    file: "%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n"
+  level:
+    root: ERROR
+    org:
+      hibernate: INFO
+      springframework:
+        web: INFO
+        security: INFO
+      apache:
+        commons:
+          dbcp2: INFO
+    com:
+      ravuthz:
+        springboot: DEBUG
+
+# mvn -Dspring.profiles.active=dev spring-boot:run
+# mvn test
