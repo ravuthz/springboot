@@ -1,15 +1,12 @@
 package com.ravuthz.springboot.domain;
 
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -64,6 +61,13 @@ public class User implements Serializable {
 
     public User() {
         //
+    }
+
+    public User(User user) {
+        this.email = user.email;
+        this.password = user.password;
+        this.active = user.active;
+        this.roles = user.roles;
     }
 
     public User(String email, String password) {
