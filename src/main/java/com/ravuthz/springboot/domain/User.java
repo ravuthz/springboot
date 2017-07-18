@@ -55,6 +55,9 @@ public class User implements Serializable {
     @Column(name = "active")
     private int active;
 
+    @Column(name = "confirmation_token")
+    private String confirmationToken;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
@@ -148,6 +151,14 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
+    public String getConfirmationToken() {
+        return confirmationToken;
+    }
+
+    public void setConfirmationToken(String confirmationToken) {
+        this.confirmationToken = confirmationToken;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -157,6 +168,8 @@ public class User implements Serializable {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", active=" + active +
+                ", confirmationToken='" + confirmationToken + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 }
