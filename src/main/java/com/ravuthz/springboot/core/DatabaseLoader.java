@@ -2,6 +2,7 @@ package com.ravuthz.springboot.core;
 
 import com.ravuthz.springboot.course.Course;
 import com.ravuthz.springboot.course.CourseRepository;
+import com.ravuthz.springboot.review.Review;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class DatabaseLoader implements ApplicationRunner {
         logger.debug("Creating courses ...");
         Course course1 = new Course("Java Basic", "http://teamtreehouse.com/library/java-basics");
         Course course2 = new Course("Big Data", "https://teamtreehouse.com/library/introduction-to-big-data");
+        logger.debug("Rate the courses ...");
+        course1.addReview(new Review(3, "It's good"));
+        course2.addReview(new Review(5, "Wow, It's great"));
         courses.save(course1);
         courses.save(course2);
     }
