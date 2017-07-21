@@ -1,9 +1,8 @@
 package com.ravuthz.springboot.domain;
 
+import com.ravuthz.springboot.core.BaseEntity;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 /**
  * Created by Vannaravuth Yo
@@ -12,23 +11,14 @@ import javax.persistence.Id;
  */
 
 @Entity
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-
+public class User extends BaseEntity {
     private String name;
     private String email;
     private String phone;
     private String password;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public User() {
+        super();
     }
 
     public String getName() {

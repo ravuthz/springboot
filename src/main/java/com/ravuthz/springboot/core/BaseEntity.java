@@ -1,6 +1,6 @@
-package com.ravuthz.springboot.domain;
+package com.ravuthz.springboot.core;
 
-import javax.persistence.Column;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -9,8 +9,12 @@ import java.util.Date;
  * Email : ravuthz@gmail.com
  */
 
+@MappedSuperclass
+public class BaseEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private final long id;
 
-public class Auditor {
     @Column(name = "created_at")
     private Date createdAt;
 
@@ -28,6 +32,10 @@ public class Auditor {
 
     @Column(name = "deleted_by")
     private int deletedBy;
+
+    public BaseEntity() {
+        this.id = 0L;
+    }
 
     public Date getCreatedAt() {
         return createdAt;
