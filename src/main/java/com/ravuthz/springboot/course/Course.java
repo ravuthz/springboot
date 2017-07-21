@@ -1,9 +1,8 @@
 package com.ravuthz.springboot.course;
 
+import com.ravuthz.springboot.core.BaseEntity;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 /**
  * Created by Vannaravuth Yo
@@ -12,20 +11,16 @@ import javax.persistence.Id;
  */
 
 @Entity
-public class Course {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private final Long id;
+public class Course extends BaseEntity {
     private String title;
     private String link;
 
-    // TODO: We are duplicating code here for every single entity.
     public Course() {
-        this.id = null;
+        super();
     }
 
     public Course(String title, String link) {
-        this();
+        super();
         this.title = title;
         this.link = link;
     }

@@ -1,1 +1,4 @@
-# Development Environments
+# Development Environmentslogging:
+logging:
+  level:
+    com.ravuthz.springboot.core: debug

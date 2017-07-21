@@ -1,9 +1,8 @@
 package com.ravuthz.springboot.review;
 
+import com.ravuthz.springboot.core.BaseEntity;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 /**
  * Created by Vannaravuth Yo
@@ -12,15 +11,12 @@ import javax.persistence.Id;
  */
 
 @Entity
-public class Review {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private final Long id;
+public class Review extends BaseEntity {
     private int rating;
     private String description;
 
     public Review() {
-        this.id = null;
+        super();
     }
 
     public int getRating() {
