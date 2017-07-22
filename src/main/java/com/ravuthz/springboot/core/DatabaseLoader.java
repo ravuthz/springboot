@@ -69,7 +69,8 @@ public class DatabaseLoader implements ApplicationRunner {
                     String buzzword = buzzwords[i % buzzwords.length];
                     String title = String.format(template, buzzword);
                     Course course = new Course(title, "http://www.test-courses.com");
-                    course.addReview(new Review(i % 5, String.format("Moar %s please !!!!!", buzzword)));
+                    int rating = i % 5 > 0 ? i % 5 : 1;
+                    course.addReview(new Review(rating, String.format("Moar %s please !!!!!", buzzword)));
                     bunchOfCourses.add(course);
                 });
         courses.save(bunchOfCourses);

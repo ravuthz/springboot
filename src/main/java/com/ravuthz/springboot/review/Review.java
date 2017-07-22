@@ -5,6 +5,10 @@ import com.ravuthz.springboot.course.Course;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Vannaravuth Yo
@@ -14,7 +18,13 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Review extends BaseEntity {
+    @NotNull
+    @Min(1)
+    @Max(5)
     private int rating;
+
+    @NotNull
+    @Size(min = 5)
     private String description;
 
     @ManyToOne
