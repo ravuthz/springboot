@@ -2,6 +2,7 @@ package com.ravuthz.springboot.review;
 
 import com.ravuthz.springboot.core.BaseEntity;
 import com.ravuthz.springboot.course.Course;
+import com.ravuthz.springboot.user.User;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -29,6 +30,9 @@ public class Review extends BaseEntity {
 
     @ManyToOne
     private Course course;
+
+    @ManyToOne
+    private User reviewer;
 
     public Review() {
         super();
@@ -61,5 +65,13 @@ public class Review extends BaseEntity {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public User getReviewer() {
+        return reviewer;
+    }
+
+    public void setReviewer(User reviewer) {
+        this.reviewer = reviewer;
     }
 }

@@ -3,6 +3,8 @@ package com.ravuthz.springboot.core;
 import com.ravuthz.springboot.course.Course;
 import com.ravuthz.springboot.course.CourseRepository;
 import com.ravuthz.springboot.review.Review;
+import com.ravuthz.springboot.user.User;
+import com.ravuthz.springboot.user.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -23,12 +26,16 @@ import java.util.stream.IntStream;
 
 @Component
 public class DatabaseLoader implements ApplicationRunner {
-    private final CourseRepository courses;
     private static final Logger logger = LoggerFactory.getLogger(DatabaseLoader.class);
+    private final CourseRepository courses;
+    private final UserRepository users;
+
+    private List<User> userList;
 
     @Autowired
-    public DatabaseLoader(CourseRepository courses) {
+    public DatabaseLoader(CourseRepository courses, UserRepository users) {
         this.courses = courses;
+        this.users = users;
     }
 
     @Override
@@ -41,6 +48,8 @@ public class DatabaseLoader implements ApplicationRunner {
         course2.addReview(new Review(5, "Wow, It's great"));
         courses.save(course1);
         courses.save(course2);
+        logger.debug("Generate the users ...");
+        generateUsers();
         logger.debug("Random the course ...");
         randomCourses();
     }
@@ -69,10 +78,24 @@ public class DatabaseLoader implements ApplicationRunner {
                     String buzzword = buzzwords[i % buzzwords.length];
                     String title = String.format(template, buzzword);
                     Course course = new Course(title, "http://www.test-courses.com");
-                    int rating = i % 5 > 0 ? i % 5 : 1;
-                    course.addReview(new Review(rating, String.format("Moar %s please !!!!!", buzzword)));
+                    Review review = new Review((i % 5) + 1, String.format("Moar %s please !!!!!", buzzword));
+                    review.setReviewer(userList.get(i % userList.size()));
+                    course.addReview(review);
                     bunchOfCourses.add(course);
                 });
         courses.save(bunchOfCourses);
+    }
+
+    private void generateUsers() {
+        String adminRole = "ROLE_ADMIN";
+        String userRole = "ROLE_USER";
+        userList = Arrays.asList(
+                new User("ravuth", "yo", "admin", "123123", new String[]{adminRole, userRole}),
+                new User("ravuth", "yo", "ravuthz", "123123", new String[]{adminRole}),
+                new User("ravuth", "yo", "ravuth1", "123123", new String[]{userRole}),
+                new User("ravuth", "yo", "ravuth2", "123123", new String[]{userRole}),
+                new User("ravuth", "yo", "ravuth3", "123123", new String[]{userRole})
+        );
+        users.save(userList);
     }
 }
