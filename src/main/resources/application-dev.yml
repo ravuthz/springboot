@@ -2,3 +2,7 @@
 logging:
   level:
     com.ravuthz.springboot.core: debug
+spring:
+  data:
+    rest:
+      default-page-size: 5
