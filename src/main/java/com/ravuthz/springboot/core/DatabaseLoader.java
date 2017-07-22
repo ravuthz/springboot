@@ -10,6 +10,10 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
+
 
 /**
  * Created by Vannaravuth Yo
@@ -37,5 +41,36 @@ public class DatabaseLoader implements ApplicationRunner {
         course2.addReview(new Review(5, "Wow, It's great"));
         courses.save(course1);
         courses.save(course2);
+        logger.debug("Random the course ...");
+        randomCourses();
+    }
+
+    private void randomCourses() {
+        String[] templates = {
+                "Up and Running with %s",
+                "%s Basics",
+                "%s for Beginners",
+                "%s for Neckbeards",
+                "Under the hood: %s"
+        };
+        String[] buzzwords = {
+                "String REST Data",
+                "Java 9",
+                "Scala",
+                "Groovy",
+                "Hibernate"
+        };
+
+        List<Course> bunchOfCourses = new ArrayList<>();
+        IntStream.range(0, 100)
+                .forEach(i -> {
+                    String template = templates[i % templates.length];
+                    String buzzword = buzzwords[i % buzzwords.length];
+                    String title = String.format(template, buzzword);
+                    Course course = new Course(title, "http://www.test-courses.com");
+                    course.addReview(new Review(i % 5, String.format("Moar %s please !!!!!", buzzword)));
+                    bunchOfCourses.add(course);
+                });
+        courses.save(bunchOfCourses);
     }
 }
