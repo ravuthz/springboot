@@ -3,6 +3,8 @@ package com.ravuthz.springboot.review;
 import com.ravuthz.springboot.core.BaseEntity;
 import com.ravuthz.springboot.course.Course;
 import com.ravuthz.springboot.user.User;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -17,7 +19,9 @@ import javax.validation.constraints.Size;
  * Email : ravuthz@gmail.com
  */
 
+@Data
 @Entity
+@NoArgsConstructor
 public class Review extends BaseEntity {
     @NotNull
     @Min(1)
@@ -34,44 +38,9 @@ public class Review extends BaseEntity {
     @ManyToOne
     private User reviewer;
 
-    public Review() {
-        super();
-    }
-
     public Review(int rating, String description) {
         this.rating = rating;
         this.description = description;
     }
 
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public User getReviewer() {
-        return reviewer;
-    }
-
-    public void setReviewer(User reviewer) {
-        this.reviewer = reviewer;
-    }
 }

@@ -2,6 +2,7 @@ package com.ravuthz.springboot.course;
 
 import com.ravuthz.springboot.core.BaseEntity;
 import com.ravuthz.springboot.review.Review;
+import lombok.Data;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -17,6 +18,7 @@ import java.util.List;
  * Email : ravuthz@gmail.com
  */
 
+@Data
 @Entity
 public class Course extends BaseEntity {
     @NotNull
@@ -39,26 +41,6 @@ public class Course extends BaseEntity {
         this();
         this.title = title;
         this.link = link;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-    public List<Review> getReviews() {
-        return reviews;
     }
 
     public void addReview(Review review) {

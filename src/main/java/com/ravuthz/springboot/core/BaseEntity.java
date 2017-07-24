@@ -1,5 +1,7 @@
 package com.ravuthz.springboot.core;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 /**
@@ -8,6 +10,7 @@ import javax.persistence.*;
  * Email : ravuthz@gmail.com
  */
 
+@Data
 @MappedSuperclass
 public class BaseEntity {
     @Id

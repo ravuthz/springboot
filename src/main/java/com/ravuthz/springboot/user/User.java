@@ -2,6 +2,8 @@ package com.ravuthz.springboot.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ravuthz.springboot.core.BaseEntity;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -13,7 +15,9 @@ import javax.persistence.Entity;
  * Email : ravuthz@gmail.com
  */
 
+@Data
 @Entity
+@NoArgsConstructor
 public class User extends BaseEntity {
     public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
     private String firstName;
@@ -26,10 +30,6 @@ public class User extends BaseEntity {
     @JsonIgnore
     private String[] roles;
 
-    protected User() {
-        super();
-    }
-
     public User(String firstName, String lastName, String username, String password, String[] roles) {
         this();
         this.firstName = firstName;
@@ -39,43 +39,7 @@ public class User extends BaseEntity {
         this.roles = roles;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password = PASSWORD_ENCODER.encode(password);
-    }
-
-    public String[] getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String[] roles) {
-        this.roles = roles;
     }
 }
