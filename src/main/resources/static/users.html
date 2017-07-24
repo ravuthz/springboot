@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.angularjs.org/1.6.4/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.6.4/angular-resource.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/users/controller.js"></script>
+</head>
+<body>
+<div class="container" ng-app="app">
+    <div class="page-header">
+        <h1>Hello</h1>
+    </div>
+    <div ng-controller="UserController">
+
+        <div class="form">
+            <div class="col-md-2 form-group">
+                <label for="id">Id:</label>
+                <input type="text" class="form-control" id="id" ng-model="user.id">
+            </div>
+            <div class="col-md-5 form-group">
+                <label for="first-name">First Name:</label>
+                <input type="text" class="form-control" id="first-name" ng-model="user.firstName">
+            </div>
+            <div class="col-md-5 form-group">
+                <label for="last-name">Username:</label>
+                <input type="text" class="form-control" id="last-name" ng-model="user.lastName">
+            </div>
+            <div class="col-md-6 form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" ng-model="user.username">
+            </div>
+            <div class="col-md-6 form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" ng-model="user.password">
+            </div>
+
+            <button type="reset" class="col-md-2 btn btn-sm btn-block btn-default">Reset</button>
+            <a class="col-md-2 btn btn-sm btn-block btn-info" ng-click="getUser(user)">Get User</a>
+            <a class="col-md-2 btn btn-sm btn-block btn-success" ng-click="updateUser(user)">Update User</a>
+            <a class="col-md-2 btn btn-sm btn-block btn-warning" ng-click="addUser(user)">Add User</a>
+            <a class="col-md-2 btn btn-sm btn-block btn-danger" ng-click="deleteUser(user)">Delete User</a>
+        </div>
+
+        <a ng-click="getAllUsers()">Get all Users</a><br/><br/>
+        <div ng-repeat="usr in users">
+            {{usr.username}} - {{usr.firstName}} {{usr.lastName}}
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

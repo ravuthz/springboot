@@ -1,7 +1,7 @@
 package com.ravuthz.springboot.user;
 
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 /**
  * Created by Vannaravuth Yo
@@ -9,7 +9,8 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
  * Email : ravuthz@gmail.com
  */
 
-@RepositoryRestResource(exported = false)
+//@RepositoryRestResource(exported = false)
+@CrossOrigin
 public interface UserRepository extends CrudRepository<User, Long> {
     User findByUsername(String username);
 }
