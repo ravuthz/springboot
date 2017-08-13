@@ -1,7 +1,7 @@
 package com.ravuthz.springboot.repository;
 
+import com.ravuthz.springboot.configure.API;
 import com.ravuthz.springboot.domain.User;
-import com.ravuthz.springboot.util.API;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;

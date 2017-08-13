@@ -1,5 +1,7 @@
 package com.ravuthz.springboot.core;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -9,6 +11,7 @@ import java.util.Date;
  * Email : ravuthz@gmail.com
  */
 
+@Data
 @MappedSuperclass
 public class BaseEntity {
     @Id
@@ -37,51 +40,4 @@ public class BaseEntity {
         this.id = 0L;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public int getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(int createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public int getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(int updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public Date getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(Date deletedAt) {
-        this.deletedAt = deletedAt;
-    }
-
-    public int getDeletedBy() {
-        return deletedBy;
-    }
-
-    public void setDeletedBy(int deletedBy) {
-        this.deletedBy = deletedBy;
-    }
 }
