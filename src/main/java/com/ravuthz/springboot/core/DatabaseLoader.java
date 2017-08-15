@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -119,13 +120,16 @@ public class DatabaseLoader implements ApplicationRunner {
 
     private Product generateProduct(String name, Double price, int unitInStock) {
         Product product = new Product();
-        product.setDate(new Date());
         product.setName(name);
         product.setPrice(price);
         product.setCondition("LARGE");
         product.setSummary("Large " + name);
         product.setUnitInStock(unitInStock);
         product.setDescription("New Large " + name);
+
+        product.setViews(1);
+        product.setTagsW("OK");
+
         return product;
     }
 
@@ -137,9 +141,6 @@ public class DatabaseLoader implements ApplicationRunner {
         categories.add(new Category("clothes", "shoes"));
         categoryRepository.save(categories);
         logger.debug("There are " + categories.size() + " categories were created.");
-
-        categories = (List<Category>) categoryRepository.findAll();
-        logger.debug(categories.toString());
     }
 
     private void makeProducts() {
@@ -150,26 +151,28 @@ public class DatabaseLoader implements ApplicationRunner {
         products.add(generateProduct("shirt", 110.50, 10));
         productRepository.save(products);
         logger.debug("There are " + products.size() + " products were created.");
+    }
 
-        products  = (List<Product>) productRepository.findAll();
-        logger.debug(products.toString());
+    private void addCategoryProductByName(String name) {
+        Product product = productRepository.findByName(name);
+        Category category = categoryRepository.findBySubCategoryName(name);
+        category.getProducts().add(product);
+        categoryRepository.save(category);
     }
 
     private void addProductCategoryByName(String name) {
         Product product = productRepository.findByName(name);
-
-        List<Category> categories = (List<Category>) categoryRepository.findAll();
-        logger.debug(categories.toString());
-
-//        Category category = categoryRepository.findByMainCategoryName(name);
-//        product.setCategory(category);
-//        productRepository.save(product);
-//        logger.debug(product.toString());
-//        logger.debug(category.toString());
+        Category category = categoryRepository.findBySubCategoryName(name);
+        product.setCategory(category);
+        productRepository.save(product);
     }
 
     private void addProductsToCategories() {
         logger.debug("Add products to categories ...");
+//        addCategoryProductByName("pant");
+//        addCategoryProductByName("shoes");
+//        addCategoryProductByName("shirt");
+
         addProductCategoryByName("pant");
         addProductCategoryByName("shoes");
         addProductCategoryByName("shirt");

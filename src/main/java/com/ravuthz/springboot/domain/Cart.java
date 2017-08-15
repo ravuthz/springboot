@@ -1,6 +1,5 @@
 package com.ravuthz.springboot.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ravuthz.springboot.core.BaseEntity;
 import lombok.Data;
 
@@ -16,23 +15,17 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(name = "carts")
 public class Cart extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 4110828160339396501L;
 
-//    @Id
-//    @GeneratedValue
-//    private Long cartId;
-
-//    @OneToMany(mappedBy = "cart", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    @OneToMany
-    @JoinTable(name = "carts", joinColumns = @JoinColumn(name = "id"))
-    private List<CartItem> cartItems;
-
     @OneToOne
-//    @JoinColumn(name = "customerId")
-    @JsonIgnore
+    @JoinColumn(name = "customerId")
     private Customer customer;
+
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    private List<CartItem> cartItems;
 
     private double grandTotal;
 

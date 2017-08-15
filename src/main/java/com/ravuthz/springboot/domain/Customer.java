@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -36,42 +38,37 @@ public class Customer extends BaseEntity implements Serializable {
     private String password;
 
     @NotEmpty (message = "Name can not be blank")
-    private String customerName;
+    private String fullName;
 
-    @Column(columnDefinition="DATETIME")
     private Date registerDate;
 
     private boolean enabled;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
-//    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToOne
+    private Cart cart;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Role> roles = new ArrayList<>();
 
-//    @OneToOne
-//    @JoinColumn(name = "id")
-//    @JsonIgnore
-//    private Cart cart;
-
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<ProductComment> comments = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-//    private List<ShippingAddress> shippingAddresses;
-//
-//    @OneToMany(mappedBy = "customer")
-//    private List<Code> codes;
 
-    public Customer(String customerName, String email, String password) {
-        this.customerName = customerName;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ShippingAddress> shippingAddresses = new ArrayList<>();
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Code> codes = new ArrayList<>();
+
+    public Customer(String fullName, String email, String password) {
         this.email = email;
         this.password = password;
+        this.fullName = fullName;
         this.enabled = true;
         this.registerDate = new Date();
-
-//        this.codes = new ArrayList<>();
-//        this.productComments = new ArrayList<>();
-//        this.shippingAddresses = new ArrayList<>();
     }
 
 }

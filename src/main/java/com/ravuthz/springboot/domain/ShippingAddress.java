@@ -15,13 +15,10 @@ import java.io.Serializable;
 
 @Data
 @Entity
+@Table(name = "shippingAddresses")
 public class ShippingAddress extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 921227846105947776L;
-
-//    @Id
-//    @GeneratedValue
-//    private Long addressId;
 
     @NotEmpty(message="Please fill in your name")
     private String fullName;

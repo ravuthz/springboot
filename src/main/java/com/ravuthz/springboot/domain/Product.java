@@ -4,6 +4,8 @@ import com.ravuthz.springboot.core.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,8 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.io.Serializable;
-import java.util.Comparator;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Vannaravuth Yo
@@ -28,9 +30,6 @@ import java.util.Date;
 public class Product extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = -6989243970039135205L;
-
-    @Column(columnDefinition="DATETIME")
-    private Date date;
 
     @NotEmpty(message = "The name must not be null")
     @Length(max = 255, message = "The field must be less than 255 characters")
@@ -48,48 +47,43 @@ public class Product extends BaseEntity implements Serializable {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "productViews", nullable = false, columnDefinition = "bigint(20) default 0")
-    private long productViews = 0;
+    @Column(name = "views", nullable = false)
+    private long views = 0;
 
     @Min(value = 0, message = "Product unit must no be less then zero.")
     private int unitInStock;
 
     @Length(max = 255, message = "The field must be less than 255 characters")
-    private String productTagsW;
+    private String tagsW;
 
     @Transient
-    private MultipartFile productImage;
+    private MultipartFile image;
 
-    /**
-     * Relationship
-     */
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ProductTag> tags = new ArrayList<>();
 
-//    @OneToMany(mappedBy = "product")
-//    @JsonIgnore
-//    private List<CartItem> cartItemList;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ProductComment> comments = new ArrayList<>();
 
-//    @OneToMany(mappedBy = "product")
-//    @JsonIgnore
-//    private List<ProductComment> productCommentList;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<CartItem> cartItems = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "categoryId")
     private Category category;
 
-//    @OneToMany(mappedBy = "product")
-//    @JsonIgnore
-//    private List<ProductTag> tags;
-
     public Product(String name, double price, String summary, String condition, String description, int unitInStock) {
-        this.date = new Date();
         this.name = name;
         this.price = price;
         this.summary = summary;
         this.condition = condition;
         this.description = description;
         this.unitInStock = unitInStock;
-        this.productViews = 0;
-        this.productTagsW = "";
+        this.views = 0;
+        this.tagsW = "";
     }
 
 }

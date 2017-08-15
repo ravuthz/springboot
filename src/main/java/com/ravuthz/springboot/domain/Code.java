@@ -14,20 +14,15 @@ import java.util.Date;
 
 @Data
 @Entity
+@Table(name = "codes")
 public class Code extends BaseEntity {
 
-//    @Id
-//    @GeneratedValue
-//    private Long codeId;
-
-    private String codeStr;
-    private int codeType; // 0:active, 1: reset PW
-
-    @Column(columnDefinition="DATETIME")
-    private Date codeDate;
+    private String text;
+    private int type; // 0:active, 1: reset PW
+    private Date date;
 
     @ManyToOne
-//    @JoinColumn(name = "customerId")
+    @JoinColumn(name = "customerId")
     private Customer customer;
 
 }

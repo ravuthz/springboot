@@ -26,7 +26,6 @@ public class Role extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "customerId")
-//    @JoinTable(name = "customers", joinColumns = @JoinColumn(name = "id"))
     private Customer customer;
 
     public Role(String email, String authority) {

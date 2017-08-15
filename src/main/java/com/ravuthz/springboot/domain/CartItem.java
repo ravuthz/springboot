@@ -1,10 +1,12 @@
 package com.ravuthz.springboot.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ravuthz.springboot.core.BaseEntity;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
@@ -15,25 +17,20 @@ import java.io.Serializable;
 
 @Data
 @Entity
+@Table(name = "cartItems")
 public class CartItem extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = -6050058936968302003L;
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    private Long cartItemId;
-
     @ManyToOne
-//    @JoinColumn(name = "cartId")
-    @JsonIgnore
+    @JoinColumn(name = "cartId")
     private Cart cart;
 
     @ManyToOne
-//    @JoinColumn(name = "productId")
+    @JoinColumn(name = "productId")
     private Product product;
 
-    private double totalPriceDouble;
-
     private int quantity;
+    private double totalPrice;
 
 }
