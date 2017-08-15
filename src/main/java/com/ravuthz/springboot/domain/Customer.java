@@ -4,14 +4,11 @@ import com.ravuthz.springboot.core.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,49 +26,37 @@ public class Customer extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = -1836726872479056197L;
 
-    @NotEmpty(message = "Email can not be blank")
+    @NotEmpty
     private String email;
 
-    @NotEmpty (message = "Password can not be blank")
+    @NotEmpty
     private String password;
 
-    @NotEmpty (message = "Name can not be blank")
-    private String customerName;
-
-    @Column(columnDefinition="DATETIME")
-    private Date registerDate;
+    @NotEmpty
+    private String fullName;
 
     private boolean enabled;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
-//    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToOne
+    private Cart cart;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Role> roles = new ArrayList<>();
 
-//    @OneToOne
-//    @JoinColumn(name = "id")
-//    @JsonIgnore
-//    private Cart cart;
-
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<ProductComment> comments = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-//    private List<ShippingAddress> shippingAddresses;
-//
-//    @OneToMany(mappedBy = "customer")
-//    private List<Code> codes;
 
-    public Customer(String customerName, String email, String password) {
-        this.customerName = customerName;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<ShippingAddress> shippingAddresses = new ArrayList<>();
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Code> codes = new ArrayList<>();
+
+    public Customer(String fullName, String email, String password) {
         this.email = email;
         this.password = password;
+        this.fullName = fullName;
         this.enabled = true;
-        this.registerDate = new Date();
-
-//        this.codes = new ArrayList<>();
-//        this.productComments = new ArrayList<>();
-//        this.shippingAddresses = new ArrayList<>();
     }
 
 }

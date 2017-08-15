@@ -16,28 +16,21 @@ import java.util.Date;
 public class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private final long id;
+    @Column(name = "id")
+    private long id;
 
-    @Column(name = "created_at")
-    private Date createdAt;
+    @Version
+    private Integer version;
 
-    @Column(name = "created_by")
-    private int createdBy;
+    private Date dateCreated;
+    private Date lastUpdated;
 
-    @Column(name = "updated_at")
-    private Date updatedAt;
-
-    @Column(name = "updated_by")
-    private int updatedBy;
-
-    @Column(name = "deleted_at")
-    private Date deletedAt;
-
-    @Column(name = "deleted_by")
-    private int deletedBy;
-
-    public BaseEntity() {
-        this.id = 0L;
+    @PreUpdate
+    @PrePersist
+    public void updateTimeStamps() {
+        lastUpdated = new Date();
+        if (dateCreated == null) {
+            dateCreated = new Date();
+        }
     }
-
 }

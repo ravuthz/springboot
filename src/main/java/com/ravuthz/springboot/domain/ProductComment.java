@@ -15,24 +15,23 @@ import java.util.Date;
 
 @Data
 @Entity
+@Table(name = "productComments")
 public class ProductComment extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 2586167050875661578L;
 
-    @Column(columnDefinition = "TEXT")
     private String content;
 
     private int commentStarts;
 
-//    @ManyToOne
-//    @JoinColumn(name = "productId")
-//    private Product product;
+    @ManyToOne
+    @JoinColumn(name = "productId")
+    private Product product;
 
     @ManyToOne
     @JoinColumn(name = "customerId")
     private Customer customer;
 
-    @Column(columnDefinition="DATETIME")
     private Date commentDate;
 
 }

@@ -15,13 +15,10 @@ import java.io.Serializable;
 
 @Data
 @Entity
+@Table(name = "customerOrderShippingAddresses")
 public class CustomerOrderShippingAddress extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 9001223266668134199L;
-
-//    @Id
-//    @GeneratedValue
-//    private Long addressId;
 
     private String fullName;
     private String phoneNumber;
@@ -33,8 +30,7 @@ public class CustomerOrderShippingAddress extends BaseEntity implements Serializ
     private Long originalShippingAddressId;
 
     @OneToOne
-//    @JoinColumn(name = "customerOrderId")
-    @JsonIgnore
+    @JoinColumn(name = "customerOrderId")
     private CustomerOrder customerOrder;
 
 }

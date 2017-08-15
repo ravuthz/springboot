@@ -15,19 +15,16 @@ import java.io.Serializable;
 
 @Data
 @Entity
+@Table(name = "productTags")
 public class ProductTag extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 6771981048033259765L;
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    private Long tagId;
-
-    @NotEmpty(message = "Can not be null")
-    private String tagContents;
+    @NotEmpty
+    private String name;
 
     @ManyToOne
-//    @JoinColumn(name = "productId")
+    @JoinColumn(name = "productId")
     private Product product;
 
 }

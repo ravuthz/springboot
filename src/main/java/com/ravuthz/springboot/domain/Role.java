@@ -4,9 +4,11 @@ import com.ravuthz.springboot.core.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.IndexColumn;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * Created by Vannaravuth Yo
@@ -26,7 +28,6 @@ public class Role extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "customerId")
-//    @JoinTable(name = "customers", joinColumns = @JoinColumn(name = "id"))
     private Customer customer;
 
     public Role(String email, String authority) {

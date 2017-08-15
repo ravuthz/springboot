@@ -14,21 +14,18 @@ import java.io.Serializable;
 
 @Data
 @Entity
+@Table(name = "customerOrderItems")
 public class CustomerOrderItem extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 8892553931694642183L;
 
-//    @Id
-//    @GeneratedValue
-//    private Long customerOrderItemId;
-
     private Long productId;
     private int productQuantity;
-    private double productPrice;
     private String productName;
+    private double productPrice;
 
     @ManyToOne
-//    @JoinColumn(name = "customerOrderId")
+    @JoinColumn(name = "customerOrderId")
     private CustomerOrder customerOrder;
 
 }
