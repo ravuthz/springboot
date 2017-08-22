@@ -1,15 +1,11 @@
 package com.ravuthz.springboot.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ravuthz.springboot.core.BaseEntity;
 import lombok.Data;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,8 +16,8 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "customerOrders")
-public class CustomerOrder extends BaseEntity implements Serializable {
+@Table(name = "orders")
+public class Order extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 584092333516618686L;
 
@@ -29,13 +25,13 @@ public class CustomerOrder extends BaseEntity implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "addressId")
-    private CustomerOrderShippingAddress customerOrderShippingAddress;
+    private OrderShippingAddress orderShippingAddress;
 
     @ManyToOne
     @JoinColumn(name = "customerId")
     private Customer customer;
 
-    @OneToMany(mappedBy = "customerOrder", cascade = CascadeType.ALL)
-    private List<CustomerOrderItem> customerOrderItems = new ArrayList<>();
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems = new ArrayList<>();
 
 }

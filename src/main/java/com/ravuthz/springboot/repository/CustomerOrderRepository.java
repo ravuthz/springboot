@@ -1,6 +1,6 @@
 package com.ravuthz.springboot.repository;
 
-import com.ravuthz.springboot.domain.CustomerOrder;
+import com.ravuthz.springboot.domain.Order;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface CustomerOrderRepository extends PagingAndSortingRepository<CustomerOrder, Long> {
+public interface CustomerOrderRepository extends PagingAndSortingRepository<Order, Long> {
 }
