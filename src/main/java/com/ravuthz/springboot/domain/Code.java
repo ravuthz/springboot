@@ -3,8 +3,10 @@ package com.ravuthz.springboot.domain;
 import com.ravuthz.springboot.core.BaseEntity;
 import lombok.Data;
 
-import javax.persistence.*;
-import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * Created by Vannaravuth Yo
@@ -17,9 +19,8 @@ import java.util.Date;
 @Table(name = "codes")
 public class Code extends BaseEntity {
 
+    private int type;
     private String text;
-    private int type; // 0:active, 1: reset PW
-    private Date date;
 
     @ManyToOne
     @JoinColumn(name = "customerId")

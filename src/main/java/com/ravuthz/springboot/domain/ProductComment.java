@@ -21,7 +21,6 @@ public class ProductComment extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 2586167050875661578L;
 
     private String content;
-
     private int commentStarts;
 
     @ManyToOne

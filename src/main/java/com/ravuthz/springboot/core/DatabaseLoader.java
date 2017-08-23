@@ -14,9 +14,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,6 +53,7 @@ public class DatabaseLoader implements ApplicationRunner {
     }
 
     @Override
+    @Transactional
     public void run(ApplicationArguments applicationArguments) throws Exception {
         logger.debug("Datasource : ", dataSource);
 
@@ -72,7 +72,7 @@ public class DatabaseLoader implements ApplicationRunner {
         return customer;
     }
 
-    private void makeRoles() {
+    public List<Role> makeRoles() {
         logger.debug("Creating roles ...");
         List<Role> roles = new ArrayList<>();
         roles.add(new Role("admin@gmail.com", "ROLE_ADMIN"));
@@ -80,9 +80,10 @@ public class DatabaseLoader implements ApplicationRunner {
         roles.add(new Role("ravuthz@gmail.com", "ROLE_CUSTOMER"));
         roleRepository.save(roles);
         logger.debug("There are " + roles.size() + " roles were created.");
+        return roles;
     }
 
-    private void makeCustomers() {
+    public List<Customer> makeCustomers() {
         logger.debug("Creating customers ...");
         List<Customer> customers = new ArrayList<>();
         customers.add(generateCustomer("admin"));
@@ -90,27 +91,30 @@ public class DatabaseLoader implements ApplicationRunner {
         customers.add(generateCustomer("ravuthz"));
         customerRepository.save(customers);
         logger.debug("There are " + customers.size() + " customers was created.");
+        return customers;
     }
 
-    private void assignCustomerRoleByEmail(String email) {
+    public Customer assignCustomerRoleByEmail(String email) {
         Role role = roleRepository.findByEmail(email);
         Customer customer = customerRepository.findByEmail(email);
         customer.getRoles().add(role);
         customerRepository.save(customer);
         logger.info(role.toString());
         logger.info(customer.toString());
+        return customer;
     }
 
-    private void assignRoleCustomerByEmail(String email) {
+    public Role assignRoleCustomerByEmail(String email) {
         Role role = roleRepository.findByEmail(email);
         Customer customer = customerRepository.findByEmail(email);
         role.setCustomer(customer);
         roleRepository.save(role);
         logger.info(role.toString());
         logger.info(customer.toString());
+        return role;
     }
 
-    private void assignCustomersRoles() {
+    public void assignCustomersRoles() {
         logger.debug("Assign role to customer ...");
         assignCustomerRoleByEmail("admin@gmail.com");
         assignRoleCustomerByEmail("manager@gmail.com");
@@ -133,7 +137,7 @@ public class DatabaseLoader implements ApplicationRunner {
         return product;
     }
 
-    private void makeCategories() {
+    public void makeCategories() {
         logger.debug("Creating categories ...");
         List<Category> categories = new ArrayList<>();
         categories.add(new Category("clothes", "shirt"));
@@ -143,7 +147,7 @@ public class DatabaseLoader implements ApplicationRunner {
         logger.debug("There are " + categories.size() + " categories were created.");
     }
 
-    private void makeProducts() {
+    public void makeProducts() {
         logger.debug("Creating products ...");
         List<Product> products = new ArrayList<>();
         products.add(generateProduct("pant", 200.00, 10));
@@ -153,26 +157,27 @@ public class DatabaseLoader implements ApplicationRunner {
         logger.debug("There are " + products.size() + " products were created.");
     }
 
-    private void addCategoryProductByName(String name) {
+    public void addCategoryProductByName(String name) {
         Product product = productRepository.findByName(name);
         Category category = categoryRepository.findBySubCategoryName(name);
         category.getProducts().add(product);
         categoryRepository.save(category);
     }
 
-    private void addProductCategoryByName(String name) {
+    public void addProductCategoryByName(String name) {
         Product product = productRepository.findByName(name);
         Category category = categoryRepository.findBySubCategoryName(name);
         product.setCategory(category);
         productRepository.save(product);
     }
 
-    private void addProductsToCategories() {
+    public void addProductsToCategories() {
         logger.debug("Add products to categories ...");
-//        addCategoryProductByName("pant");
-//        addCategoryProductByName("shoes");
-//        addCategoryProductByName("shirt");
-
+        // add products to category
+        addCategoryProductByName("pant");
+        addCategoryProductByName("shoes");
+        addCategoryProductByName("shirt");
+        // set category to product
         addProductCategoryByName("pant");
         addProductCategoryByName("shoes");
         addProductCategoryByName("shirt");

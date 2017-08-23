@@ -1,6 +1,5 @@
 package com.ravuthz.springboot.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ravuthz.springboot.core.BaseEntity;
 import lombok.Data;
 
@@ -15,8 +14,8 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@Table(name = "customerOrderShippingAddresses")
-public class CustomerOrderShippingAddress extends BaseEntity implements Serializable {
+@Table(name = "orderShippingAddresses")
+public class OrderShippingAddress extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 9001223266668134199L;
 
@@ -30,7 +29,7 @@ public class CustomerOrderShippingAddress extends BaseEntity implements Serializ
     private Long originalShippingAddressId;
 
     @OneToOne
-    @JoinColumn(name = "customerOrderId")
-    private CustomerOrder customerOrder;
+    @JoinColumn(name = "orderId")
+    private Order order;
 
 }

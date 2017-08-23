@@ -4,8 +4,6 @@ import com.ravuthz.springboot.core.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,17 +29,17 @@ public class Product extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = -6989243970039135205L;
 
-    @NotEmpty(message = "The name must not be null")
-    @Length(max = 255, message = "The field must be less than 255 characters")
+    @NotEmpty
+    @Length(max = 255)
     private String name;
 
-    @Min(value = 0, message = "Product price must no be less then zero.")
+    @Min(value = 0)
     private double price;
 
-    @Length(max = 255, message = "The field must be less than 255 characters")
+    @Length(max = 255)
     private String summary;
 
-    @NotEmpty(message = "Condition must not be null")
+    @NotEmpty
     private String condition;
 
     @Column(columnDefinition = "TEXT")
@@ -50,25 +48,22 @@ public class Product extends BaseEntity implements Serializable {
     @Column(name = "views", nullable = false)
     private long views = 0;
 
-    @Min(value = 0, message = "Product unit must no be less then zero.")
+    @Min(value = 0)
     private int unitInStock;
 
-    @Length(max = 255, message = "The field must be less than 255 characters")
+    @Length(max = 255)
     private String tagsW;
 
     @Transient
     private MultipartFile image;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<ProductTag> tags = new ArrayList<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<ProductComment> comments = new ArrayList<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<CartItem> cartItems = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL)

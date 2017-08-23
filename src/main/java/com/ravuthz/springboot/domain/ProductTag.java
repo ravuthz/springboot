@@ -20,7 +20,7 @@ public class ProductTag extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 6771981048033259765L;
 
-    @NotEmpty(message = "Can not be null")
+    @NotEmpty
     private String name;
 
     @ManyToOne
