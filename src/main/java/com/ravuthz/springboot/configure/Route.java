@@ -6,7 +6,7 @@ package com.ravuthz.springboot.configure;
  * Email : ravuthz@gmail.com
  */
 
-public enum Routes {
+public enum Route {
 
     APP(""),
     API("/api"),
@@ -25,7 +25,7 @@ public enum Routes {
 
     private String text;
 
-    Routes(String text) {
+    Route(String text) {
         this.text = text;
     }
 
